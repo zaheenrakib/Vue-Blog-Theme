@@ -1,7 +1,7 @@
 <template>
   <Navbar />
   <main>
-    <div class="pt-17">
+    <div class="">
       <router-view />
     </div>
   </main>
@@ -11,5 +11,5 @@
 
 
 import { ref, reactive, watch } from 'vue';
-import Navbar from './navBar.vue'
+import Navbar from './Navbar.vue'
 </script>
