@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import Layout from '@/layout/Layout.vue'
 import nProgress from 'nprogress'
+import Layout from '@/layout/Layout.vue'
+import HomeView from '../views/HomeView.vue'
+import BlogList from '@/views/BlogList.vue'
+import BlogDetails from '@/components/BlogPost/BlogDetails.vue'
 
 
 const routes = [
@@ -9,11 +11,20 @@ const routes = [
     path: '/',
     component: Layout,
     children: [
-
       {
         path: '',
         name: 'home',
         component: HomeView,
+      },
+      {
+        path: '/blog',
+        name: 'blog',
+        component: BlogList,
+      },
+      {
+        path: '/blog/:id',
+        name: 'blog-details',
+        component: BlogDetails,
       }
     ]
   }
