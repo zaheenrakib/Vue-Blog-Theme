@@ -54,10 +54,10 @@ import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 
 const navigation = [
-  { name: 'Home', href: '#' },
-  { name: 'About', href: '#about' },
-  { name: 'Services', href: '#services' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Home', href: '/' },
+  // { name: 'About', href: '#about' },
+  { name: 'Blog', href: '/blog' },
+  // { name: 'Contact', href: '#contact' },
 ]
 </script>
 
