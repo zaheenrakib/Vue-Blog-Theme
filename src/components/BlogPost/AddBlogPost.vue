@@ -212,6 +212,8 @@
 <script setup>
 import { ref } from 'vue'
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 const form = ref({
   title: '',
   slug: '',
@@ -265,7 +267,7 @@ const submitForm = async () => {
   form.value.tags = tagsInput.value.split(',').map(t => t.trim()).filter(Boolean)
   
   try {
-    const res = await fetch('https://api.mirazmart.com/api/blog/addblog', {
+    const res = await fetch(`${BASE_URL}/api/blog/addblog`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form.value),

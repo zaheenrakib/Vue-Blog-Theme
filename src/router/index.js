@@ -4,6 +4,7 @@ import Layout from '@/layout/Layout.vue'
 import HomeView from '@/views/HomeView.vue'
 import BlogList from '@/views/BlogList.vue'
 import LoginView from '@/views/LoginView.vue'
+import SignUpView from '@/views/SignUpView.vue'
 import BlogDetails from '@/components/BlogPost/BlogDetails.vue'
 import AddBlogPost from '@/components/BlogPost/AddBlogPost.vue'
 
@@ -37,6 +38,11 @@ const routes = [
         path: "/login",
         name: "login",
         component: LoginView,
+      },
+      {
+        path: "/signup",
+        name: "signup",
+        component: SignUpView
       }
     ]
   }

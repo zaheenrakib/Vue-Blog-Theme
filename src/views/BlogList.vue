@@ -15,7 +15,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
       <div v-for="post in filteredPosts.slice(0, visibleCount)" :key="post.id"
         class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
-        <img :src="post.featuredImage || fallbackImage" class="w-full h-48 object-cover" />
+        <img :src="post.featuredImage" class="w-full h-48 object-cover" />
         <div class="p-4">
           <h2 class="text-xl font-semibold mb-2">{{ post.title }}</h2>
           <p class="text-gray-600 text-sm mb-2 line-clamp-3">{{ post.description }}</p>
@@ -44,20 +44,18 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const posts = ref([])
 const visibleCount = ref(6)
 const searchQuery = ref('')
 const selectedTag = ref('')
-const fallbackImage = 'http://localhost:5000/api/blog/getblog'
 
 onMounted(async () => {
   try {
-    const res = await fetch('https://api.mirazmart.com/api/blog/getblog')
-    const json = await res.json()
-    console.log('✅ API response:', json)
-
+    const res = await fetch(`${BASE_URL}/api/blog/getblog`)
+    const json = await res.json();
+    console.log(BASE_URL)
     const blogList = Array.isArray(json) ? json : []
-    console.log('📦 Blog List:', blogList)
 
     posts.value = blogList.map((post) => {
       // Parse tags if it's a JSON string
@@ -69,16 +67,12 @@ onMounted(async () => {
         }
       }
 
-      // Ensure tags is always an array
       post.tags = Array.isArray(post.tags) ? post.tags : []
 
-      // Fallback for tag_list for compatibility
       post.tag_list = post.tags
 
       return post
     })
-    // Debug: log posts and tags
-    console.log('📦 Posts after mapping:', posts.value)
     posts.value.forEach((post, idx) => {
       console.log(`Post #${idx + 1} title:`, post.title, '| tags:', post.tags)
     })

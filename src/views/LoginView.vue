@@ -163,9 +163,9 @@
           <div class="mt-8 text-center">
             <p class="text-gray-600">
               Don't have an account?
-              <a href="#" class="text-blue-600 hover:text-blue-700 font-semibold transition-colors">
+              <router-link to="/signup" class="text-blue-600 hover:text-blue-700 font-semibold transition-colors">
                 Sign up now
-              </a>
+              </router-link>
             </p>
           </div>
         </div>
