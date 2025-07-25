@@ -1,9 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import nProgress from 'nprogress'
 import Layout from '@/layout/Layout.vue'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '@/views/HomeView.vue'
 import BlogList from '@/views/BlogList.vue'
+import LoginView from '@/views/LoginView.vue'
 import BlogDetails from '@/components/BlogPost/BlogDetails.vue'
+import AddBlogPost from '@/components/BlogPost/AddBlogPost.vue'
 
 
 const routes = [
@@ -25,6 +27,16 @@ const routes = [
         path: '/blog/:id',
         name: 'blog-details',
         component: BlogDetails,
+      },
+      {
+        path: '/add-blog', 
+        name: 'add-blog',
+        component: AddBlogPost,
+      },
+      {
+        path: "/login",
+        name: "login",
+        component: LoginView,
       }
     ]
   }

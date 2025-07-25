@@ -17,7 +17,7 @@
               muted
               loop
               playsinline
-              class="absolute top-0 left-0 w-full h-full object-cover"
+              class="absolute top-0 left-0 w-full h-full object-cover transform scale-105 transition-transform duration-1000"
             >
               <source :src="slide.image" type="video/mp4" />
             </video>
@@ -25,21 +25,26 @@
 
           <template v-else>
             <div
-              class="absolute top-0 left-0 w-full h-full bg-cover bg-center"
+              class="absolute top-0 left-0 w-full h-full bg-cover bg-center transform scale-105 transition-transform duration-1000"
               :style="{ backgroundImage: `url(${slide.image})` }"
             ></div>
           </template>
 
-          <!-- Overlay -->
-          <div class="absolute top-0 left-0 w-full h-full bg-opacity-50"></div>
+          <!-- ✨ Overlay Gradient -->
+          <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-black/60 via-black/40 to-black/60"></div>
 
-          <!-- Text Content -->
-          <div class="z-10 text-white max-w-2xl">
-            <h1 class="text-3xl sm:text-5xl font-bold mb-4">{{ slide.title }}</h1>
-            <p class="text-lg sm:text-xl mb-6">{{ slide.description }}</p>
+          <!-- 💡 Text Content -->
+          <div class="z-10 text-white max-w-2xl px-4">
+            <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight drop-shadow-lg animate-fade-in">
+              {{ slide.title }}
+            </h1>
+            <p class="text-lg sm:text-xl mb-6 opacity-90 animate-fade-in delay-200">
+              {{ slide.description }}
+            </p>
+
             <a
               :href="slide.ctaLink"
-              class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded"
+              class="inline-block bg-blue-600 hover:bg-blue-700 transition-colors duration-300 text-white font-semibold py-3 px-8 rounded-full shadow-lg animate-fade-in delay-400"
             >
               {{ slide.ctaText }}
             </a>
@@ -86,7 +91,31 @@ const slides = [
 </script>
 
 <style scoped>
+/* ✨ Fade-in animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease forwards;
+}
+
+.animate-fade-in.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.animate-fade-in.delay-400 {
+  animation-delay: 0.4s;
+}
+
 h1, p {
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
 }
 </style>
