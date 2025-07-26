@@ -1,4 +1,3 @@
-// 📁 src/views/BlogList.vue
 <template>
   <div class="max-w-7xl mx-auto p-4 flex items-center flex-col">
     <!-- 🔍 Search & Filters -->
@@ -13,19 +12,19 @@
     </div>
 
     <!-- 📰 Blog Cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
       <div v-for="post in filteredPosts.slice(0, visibleCount)" :key="post.id"
         class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
-        <img :src="post.cover_image || fallbackImage" class="w-full h-48 object-cover" />
+        <img :src="post.featuredImage" class="w-full h-48 object-cover" />
         <div class="p-4">
           <h2 class="text-xl font-semibold mb-2">{{ post.title }}</h2>
-          <p class="text-gray-600 text-sm mb-2">{{ post.description }}</p>
+          <p class="text-gray-600 text-sm mb-2 line-clamp-3">{{ post.description }}</p>
           <div class="flex flex-wrap gap-2 mb-2">
-            <span v-for="tag in post.tag_list" :key="tag" class="text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded">
+            <span v-for="tag in post.tags" :key="tag" class="text-xs bg-blue-100 text-blue-600 px-2 py-0.5 rounded">
               {{ tag }}
             </span>
           </div>
-          <router-link :to="`/blog/${post.id}`" class="text-blue-600 hover:underline">
+          <router-link :to="`/blog/${post.slug}`" class="text-blue-600 hover:underline">
             See more →
           </router-link>
         </div>
@@ -43,33 +42,65 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const posts = ref([])
 const visibleCount = ref(6)
 const searchQuery = ref('')
 const selectedTag = ref('')
-const fallbackImage = 'https://via.placeholder.com/640x360?text=No+Image'
 
 onMounted(async () => {
-  const res = await fetch('https://dev.to/api/articles?per_page=30')
-  posts.value = await res.json()
+  try {
+    const res = await fetch(`${BASE_URL}/api/blog/getblog`)
+    const json = await res.json();
+    console.log(BASE_URL)
+    const blogList = Array.isArray(json) ? json : []
+
+    posts.value = blogList.map((post) => {
+      // Parse tags if it's a JSON string
+      if (typeof post.tags === 'string') {
+        try {
+          post.tags = JSON.parse(post.tags)
+        } catch (e) {
+          post.tags = []
+        }
+      }
+
+      post.tags = Array.isArray(post.tags) ? post.tags : []
+
+      post.tag_list = post.tags
+
+      return post
+    })
+    posts.value.forEach((post, idx) => {
+      console.log(`Post #${idx + 1} title:`, post.title, '| tags:', post.tags)
+    })
+  } catch (err) {
+    console.error('Error fetching blog posts:', err)
+  }
 })
 
 const uniqueTags = computed(() => {
   const tags = new Set()
   posts.value.forEach((post) => {
-    post.tag_list.forEach((tag) => tags.add(tag))
+    post.tags.forEach((tag) => tags.add(tag))
   })
   return Array.from(tags)
 })
 
 const filteredPosts = computed(() => {
   return posts.value.filter((post) => {
-    const matchesSearch = post.title.toLowerCase().includes(searchQuery.value.toLowerCase())
-    const matchesTag = selectedTag.value === '' || post.tag_list.includes(selectedTag.value)
+    const matchesSearch = post.title?.toLowerCase().includes(searchQuery.value.toLowerCase())
+    const matchesTag = selectedTag.value === '' || post.tags.includes(selectedTag.value)
     return matchesSearch && matchesTag
+    
   })
+ 
+})
+
+watch(filteredPosts, (newVal) => {
+  console.log('🔍 Filtered posts:', newVal.length, 'posts found')
 })
 
 function loadMore() {
