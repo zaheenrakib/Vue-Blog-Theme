@@ -67,7 +67,7 @@ import 'swiper/css/navigation'
 
 const slides = [
   {
-    image: 'https://videos.pexels.com/video-files/12659228/12659228-uhd_2560_1440_60fps.mp4',
+    image: 'https://cdn.pixabay.com/video/2025/05/13/278750_large.mp4',
     title: 'Welcome to Our Tech World',
     description: 'We build cutting-edge digital experiences for modern brands.',
     ctaText: 'Get Started',
