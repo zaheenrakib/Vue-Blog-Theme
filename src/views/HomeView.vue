@@ -8,6 +8,5 @@ import NewsLetter from '@/components/NewsLetter/NewsLetter.vue';
   <main>
     <HeroBanner />
     <BlogList />
-    <NewsLetter />
   </main>
 </template>
