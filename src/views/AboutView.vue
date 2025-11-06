@@ -5,7 +5,7 @@
 
       <section class="text-center">
         <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white">
-          About [Your Blog Name]
+          About Safollo Path
         </h1>
         <p class="mt-4 text-xl text-gray-600 dark:text-gray-300">
           Welcome! Here's a little about our mission and the person behind the posts.
@@ -20,7 +20,7 @@
         </h2>
         <p class="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
           Our goal is to provide the most insightful, practical, and engaging content about 
-          <strong>[Your Niche, e.g., Vue.js Development, Modern Gastronomy, Global Travel]</strong>.
+          <strong>Vue.js Development, Modern Gastronomy, Global Travel</strong>.
           We believe in the power of sharing knowledge and stories to inspire, educate, 
           and foster a vibrant community.
         </p>
@@ -42,16 +42,16 @@
           
           <div class="text-center sm:text-left">
             <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">
-              [Your Name]
+              Zaheen Rakib
             </h3>
             <p class="text-md text-indigo-500 dark:text-indigo-400 font-medium">
               Creator & Lead Writer
             </p>
             <p class="mt-3 text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-              Hi, I'm [Your Name], a <strong>[Your Profession]</strong> with a deep passion for 
-              <strong>[Your Niche]</strong>. I started this blog to share my journey and connect 
+              Hi, I'm Zaheen Rakib, a <strong>Software Developer</strong> with a deep passion for 
+              <strong>Software Developer</strong>. I started this blog to share my journey and connect 
               with others who love [Your Topic] as much as I do. When I'm not writing, you can 
-              find me [Your Hobby].
+              find me whatsapps.
             </p>
           </div>
         </div>
@@ -74,8 +74,5 @@
 </template>
 
 <style>
-/* No scoped or global styles are needed for this component, 
-  as Tailwind CSS utility classes are handling all the styling.
-  You can leave this <style> block empty or remove it entirely.
-*/
+
 </style>
