@@ -7,7 +7,7 @@
         <div class="flex justify-start">
           <div class="flex-shrink-0 flex items-center group">
             <router-link to="/" class="transform hover:scale-105 transition-transform duration-200">
-              <img class=" transition-all duration-300 group-hover:brightness-110" 
+              <img class="w-10 h-10 transition-all duration-300 group-hover:brightness-110" 
                    src="@/assets/logos/main.png" 
                    alt="Logo" />
             </router-link>
