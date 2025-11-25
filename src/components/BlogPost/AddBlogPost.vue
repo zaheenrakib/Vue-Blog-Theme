@@ -125,7 +125,7 @@ const resetForm = () => {
 
 const submitForm = async () => {
   form.value.tags = tagsInput.value.split(',').map(tag => tag.trim()).filter(Boolean)
-  // formData.append("slug", value.title?.toLowerCase().split(" ").join("-") || "");
+  formData.append("slug", value.title?.toLowerCase().split(" ").join("-") || "");
   message.value = ''
   error.value = ''
   isSubmitting.value = true
