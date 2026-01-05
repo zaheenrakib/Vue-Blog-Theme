@@ -1,170 +1,104 @@
 <template>
-  <Disclosure as="nav" class="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-100 dark:border-gray-800 sticky top-0 z-50">
+  <Disclosure as="nav" v-slot="{ open }" class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50 transition-all duration-300">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-3 items-center h-16 gap-4">
+      <div class="flex justify-between items-center h-16">
         
-        <!-- Left Column: Logo -->
-        <div class="flex justify-start">
-          <div class="flex-shrink-0 flex items-center group">
-            <router-link to="/" class="transform hover:scale-105 transition-transform duration-200">
-              <img class="w-10 h-10 transition-all duration-300 group-hover:brightness-110" 
-                   src="@/assets/logos/main.png" 
-                   alt="Logo" />
-            </router-link>
-          </div>
-        </div>
-
-        <!-- Center Column: Desktop Menu -->
-        <div class="hidden sm:flex justify-center">
-          <div class="flex items-center space-x-1 bg-gray-50 dark:bg-gray-800/50 rounded-full px-2 py-1 backdrop-blur-sm">
-            <a v-for="item in navigation" 
-               :key="item.name" 
-               :href="item.href"
-               class="relative px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 rounded-full transition-all duration-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-white dark:hover:bg-gray-700 group">
-              {{ item.name }}
-              <span class="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 rounded-full"></span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Right Column: Login Button -->
-        <div class="hidden sm:flex justify-end">
-          <button class="group relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 hover:from-blue-700 hover:via-purple-700 hover:to-blue-800 text-white px-6 py-2.5 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800">
-            <span class="relative z-10 flex items-center space-x-2">
-              <svg class="w-4 h-4 transition-transform group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
-              </svg>
-              <router-link to="/login">
-                <span>Login</span>
-              </router-link>
+        <div class="flex-shrink-0 flex items-center">
+          <router-link to="/" class="flex items-center space-x-2 group">
+            <div class="w-9 h-9 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-lg flex items-center justify-center transform group-hover:rotate-12 transition-transform shadow-lg">
+              <span class="text-white font-bold text-xl">S</span>
+            </div>
+            <span class="hidden md:block font-black text-xl tracking-tighter text-gray-900 dark:text-white uppercase">
+              Safollo<span class="text-blue-600">Path</span>
             </span>
-            <div class="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-          </button>
+          </router-link>
         </div>
 
-        <!-- Mobile Hamburger -->
-        <div class="sm:hidden flex justify-end">
-          <DisclosureButton
-            class="group inline-flex items-center justify-center p-2.5 rounded-xl text-gray-500 dark:text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 transform hover:scale-110">
-            <Bars3Icon v-if="!open" class="h-6 w-6 transition-transform duration-300 group-hover:rotate-90" />
-            <XMarkIcon v-else class="h-6 w-6 transition-transform duration-300 group-hover:rotate-180" />
-          </DisclosureButton>
+        <div class="hidden lg:flex items-center space-x-1">
+          <router-link 
+            v-for="item in navigation" 
+            :key="item.name" 
+            :to="item.href"
+            class="px-3 py-2 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-white rounded-md transition-colors relative group"
+            active-class="text-blue-600 dark:text-white"
+          >
+            {{ item.name }}
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left rounded-full"></span>
+          </router-link>
+        </div>
+
+        <div class="flex items-center space-x-3">
+          <button class="p-2 text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors focus:outline-none">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
+
+          <router-link to="/login" class="hidden sm:block px-5 py-2 text-sm font-bold text-white bg-gray-900 dark:bg-white dark:text-gray-900 rounded-full hover:bg-blue-600 dark:hover:bg-blue-100 transition-all shadow-md active:scale-95">
+            Sign In
+          </router-link>
+
+          <div class="lg:hidden">
+            <DisclosureButton class="p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none">
+              <span class="sr-only">Open menu</span>
+              <Bars3Icon v-if="!open" class="block h-6 w-6" />
+              <XMarkIcon v-else class="block h-6 w-6" />
+            </DisclosureButton>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Enhanced Mobile Menu -->
-    <DisclosurePanel class="sm:hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-t border-gray-100 dark:border-gray-800">
-      <div class="px-4 pt-4 pb-6 space-y-3">
-        <!-- Mobile Navigation Links -->
-        <div class="space-y-2">
-          <a v-for="(item, index) in navigation" 
-             :key="item.name" 
-             :href="item.href"
-             :style="`animation-delay: ${index * 100}ms`"
-             class="group block px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 dark:hover:from-gray-800 dark:hover:to-gray-700 rounded-xl transition-all duration-300 transform hover:translate-x-2 animate-slideIn">
-            <div class="flex items-center space-x-3">
-              <div class="w-2 h-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full transform scale-0 group-hover:scale-100 transition-transform duration-300"></div>
-              <span>{{ item.name }}</span>
-            </div>
-          </a>
+    <transition
+      enter-active-class="transition duration-200 ease-out"
+      enter-from-class="transform -translate-y-4 opacity-0"
+      enter-to-class="transform translate-y-0 opacity-100"
+      leave-active-class="transition duration-150 ease-in"
+      leave-from-class="transform translate-y-0 opacity-100"
+      leave-to-class="transform -translate-y-4 opacity-0"
+    >
+      <DisclosurePanel class="lg:hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+        <div class="px-4 pt-2 pb-6 space-y-1">
+          <DisclosureButton
+            v-for="item in navigation"
+            :key="item.name"
+            as="router-link"
+            :to="item.href"
+            class="block px-4 py-3 text-base font-bold text-gray-700 dark:text-gray-200 hover:bg-blue-50 dark:hover:bg-gray-800 hover:text-blue-600 rounded-xl"
+          >
+            {{ item.name }}
+          </DisclosureButton>
+          <div class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-800">
+            <router-link to="/login" class="block w-full text-center py-4 bg-blue-600 text-white font-black rounded-xl shadow-lg">
+              Sign In to SafolloPath
+            </router-link>
+          </div>
         </div>
-        
-        <!-- Mobile Login Button -->
-        <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
-          <button class="group w-full relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-700 hover:from-blue-700 hover:via-purple-700 hover:to-blue-800 text-white px-6 py-3.5 rounded-xl text-base font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-800">
-            <span class="relative z-10 flex items-center justify-center space-x-2">
-              <svg class="w-5 h-5 transition-transform group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013 3v1"></path>
-              </svg>
-              <span>Login to Your Account</span>
-            </span>
-            <div class="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-          </button>
-        </div>
-      </div>
-    </DisclosurePanel>
+      </DisclosurePanel>
+    </transition>
   </Disclosure>
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 
 const navigation = [
   { name: 'Home', href: '/' },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Add Blog', href: "/add-blog" }
+  { name: 'Tech', href: '/category/tech' },
+  { name: 'News', href: '/category/news' },
+  { name: 'Travel', href: '/category/travel' },
+  { name: 'Popular', href: '/popular' },
+  { name: 'About', href: '/about' },
+  { name: 'Contact', href: '/contact' },
 ]
 </script>
 
 <style scoped>
-/* Smooth animations */
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Scoped styles for the sticky behavior and refined shadows */
+nav {
+  /* This ensures the backdrop blur is high quality */
+  -webkit-backdrop-filter: blur(12px);
 }
 
-.animate-slideIn {
-  animation: slideIn 0.3s ease-out forwards;
-  opacity: 0;
-}
-
-/* Custom scrollbar for webkit browsers */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, #2563eb, #7c3aed);
-}
-
-/* Enhanced focus styles for accessibility */
-button:focus-visible,
-a:focus-visible {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
-}
-
-/* Smooth backdrop blur support */
-@supports (backdrop-filter: blur(12px)) {
-  .backdrop-blur-md {
-    backdrop-filter: blur(12px);
-  }
-}
-
-/* Gradient text effect */
-.gradient-text {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #3b82f6);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradientShift 3s ease infinite;
-}
-
-@keyframes gradientShift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
 </style>
