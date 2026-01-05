@@ -121,6 +121,7 @@ const form = ref({
   title: '',
   type: 1,
   categoryId: 1,
+  authorId:1,
   featuredImage: '',
   tags: [],
   description: '',
