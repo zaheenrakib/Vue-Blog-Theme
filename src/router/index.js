@@ -7,6 +7,7 @@ import LoginView from '@/views/LoginView.vue'
 import SignUpView from '@/views/SignUpView.vue'
 import BlogDetails from '@/components/BlogPost/BlogDetails.vue'
 import AddBlogPost from '@/components/BlogPost/AddBlogPost.vue'
+import TechView from '@/views/TechView.vue'
 
 
 const routes = [
@@ -43,6 +44,11 @@ const routes = [
         path: "/signup",
         name: "signup",
         component: SignUpView
+      },
+      {
+        path: "/category/tech",
+        name: "Tech",
+        component: TechView
       }
     ]
   }
